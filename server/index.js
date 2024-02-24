@@ -106,14 +106,7 @@ app.post('/admin/addcourse',authenticateJwt,async (req,res)=>{
     }
 
 })
-// app.get('/admin/courses',authenticateJwt,async(req,res)=>{
-//         const courses=await Course.find({});
-        
-//             res.json({courses});
-       
 
-// })
-// })
 app.post('/user/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
