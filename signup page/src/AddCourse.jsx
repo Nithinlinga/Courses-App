@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react' 
 import Appbar from './Appbar'
 import { Button, Card, TextField } from '@mui/material';
 
@@ -7,11 +7,12 @@ const AddCourse = () => {
     const [description,setDescription]=useState(" ");
     const handleSubmit=()=>{
         var token=localStorage.getItem("token")
+        console.log(token)
         fetch("http://localhost:3000/admin/addcourse",{
             method:"POST",
             body:JSON.stringify({
                 title:title,
-                description:description,
+                description:description, 
                 image:"",
                 published:true
 

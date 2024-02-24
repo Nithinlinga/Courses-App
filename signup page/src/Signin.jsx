@@ -25,7 +25,7 @@ function Signin(){
     }
     return(
         <>
-        <Appbar></Appbar>
+        <Appbar props={username}></Appbar>
         <center>
             <div style={{
                 paddingTop:150,
