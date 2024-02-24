@@ -167,7 +167,40 @@ app.delete('/admin/course/:courseId', authenticateJwt, async (req, res) => {
         res.status(500).json({ message: "Error deleting course" }); 
     }
 });
-
+app.post('/user/course/:courseId',authenticateJwt,async(req,res)=>{
+    try {
+        const {courseId}=req.params;
+        const username=req.headers.username;
+        const user=await User.findOne({username,role:"user"});
+        if(user){
+        
+        
+        await User.updateOne({
+            username
+        },{
+            "$push":{
+                purchasedCourses:courseId
+            }
+        })
+        res.json({message:"purchased successfully"});
+    }
+    else{
+        res.json({message:"User doesnot exist"})
+    }
+    } catch (error) {
+        res.json({message:"error"})
+    }
+})
+app.get("/user/purchasedCourses",async (req,res)=>{
+    // const username=req.headers.username;
+    const user=await User.findOne({username:req.headers.username});
+    const courses=await Course.find({
+        _id:{
+            "$in":user.purchasedCourses
+        }
+    })
+    res.json({Courses:courses})
+})
 app.listen(3002,()=>{
     console.log("App listening on port 3002")
 }) 
